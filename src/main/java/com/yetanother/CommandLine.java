@@ -1,4 +1,4 @@
-package com.koral;
+package com.yetanother;
 
 import java.util.HashMap;
 

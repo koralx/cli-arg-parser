@@ -1,4 +1,4 @@
-package com.koral;
+package com.yetanother;
 
 public class DefaultParser implements CommandLineParser {
 
@@ -14,6 +14,7 @@ public class DefaultParser implements CommandLineParser {
 
             // Обработка справки
             if (arg.equals("--help")) {
+                commandLine.addOption("help");
                 printHelp(options);
                 return commandLine;
             }
@@ -53,7 +54,18 @@ public class DefaultParser implements CommandLineParser {
     // Метод для вывода справки
     private void printHelp(Options options) {
         for (Option option : options.getOptions()) {
-            System.out.println("-" + option.getShortArgName() + " --" + option.getFullArgName() + " : " + option.getDescription());
+            String shortArg = "  ";
+            String fullArg = option.getFullArgName();
+            String desc = option.getDescription();
+            if (!option.getShortArgName().isEmpty())  {
+                shortArg = "-" + option.getShortArgName();
+            }
+            if (!fullArg.isEmpty())  {
+                fullArg = "--" + fullArg;
+            }
+            int width = 35;
+            //System.out.println(shortArg + " " + fullArg + " : " + option.getDescription());
+            System.out.printf("%s %-"+ width + "s %s\r\n", shortArg, fullArg, desc);
         }
     }
 }
